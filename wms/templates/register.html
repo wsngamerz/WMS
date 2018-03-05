@@ -1,0 +1,31 @@
+{% include 'includes/header.html' %}
+<header>
+  <section class="headerContent">
+    <h1 class="title">{{ config.General.fullname }}</h1>
+  </section>
+</header>
+<main class="mainContent">
+  {% if session['loggedIn'] %}
+    <section class="box box-danger">
+      <p>
+        You're logged in!
+      </p>
+    </section>
+  {% else %}
+    <form class="form" action="/register/" method="POST">
+      <h2 class="heading-1">Sign up To {{ config.General.shortname }}</h1>
+      <input class="input input-text" type="text" name="firstName" placeholder="First Name">
+      <input class="input input-text" type="text" name="lastName" placeholder="Last Name">
+      <input class="input input-text" type="username" name="username" placeholder="Username">
+      <input class="input input-text" type="password" name="password" placeholder="Password">
+      <input class="input input-text" type="password" name="passwordConfirm" placeholder="Password Confirmation">
+      <input class="input input-text" type="email" name="email" placeholder="Email Address">
+      <input class="button button-success button-login" type="submit" value="Register">
+      <p>
+        <a class="link" href="{{ config.request.rootURL }}login/">Login Account</a> -
+        <a class="link">Forgot Password</a>
+      </p>
+    </form>
+  {% endif %}
+</main>
+{% include 'includes/footer.html' %}

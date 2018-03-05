@@ -1,0 +1,21 @@
+{% include 'includes/header.html' %}
+<header>
+  <section class="headerContent">
+    <h1 class="title">{{ config.General.fullname }}</h1>
+  </section>
+</header>
+<main class="mainContent">
+  <section class="profile">
+    {% if config.user.loggedIn %}
+      <h4 class="heading-3">Welcome Back User</h4>
+      <a class="link">Your Libray</a> - <a class="link" href="/logout/">Logout</a>
+    {% else %}
+      <h4 class="heading-3">Please Register or Login</h4>
+      <section class="group group-two">
+        <a class="button button-success" href="/login/">Login</a>
+        <a class="button button-info" href="/register/">Register</a>
+      </section>
+    {% endif %}
+  </section>
+</main>
+{% include 'includes/footer.html' %}
