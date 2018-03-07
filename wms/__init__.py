@@ -2,6 +2,10 @@
 # wms/__init__.py
 # By William Neild
 
+# Setup libraries
+import sys
+sys.path.insert(1, "./libraries/")
+
 # grab all files/modules needed for wms
 from wms.db import DB
 from wms.config import Config
