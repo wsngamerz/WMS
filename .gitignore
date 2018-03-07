@@ -1,5 +1,5 @@
 __pycache__/
-main.log
+logs/
 Test Files/
 config.ini
 start.bat
