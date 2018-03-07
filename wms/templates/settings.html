@@ -1,13 +1,13 @@
 {% include 'includes/header.html' %}
 <main class="mainContent">
-  {% if session['logged_in'] %}
+  {% if config.user.loggedIn %}
     <h1>Settings</h1>
   {% else %}
-    <section>
-      <p>
-        You Need to be logged in
-      </p>
-    </section>
+  <section class="box box-danger">
+    <p>
+      You need to be Logged In
+    </p>
+  </section>
   {% endif %}
 </main>
 {% include 'includes/footer.html' %}

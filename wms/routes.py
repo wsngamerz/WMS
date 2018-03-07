@@ -6,11 +6,18 @@ class Routes:
         self.routes(app)
 
     def routes(self, app):
+
         @app.route("/")
         def indexPage():
             pageData = self.setConfig()
             return render_template('index.html', pageName="Home", config=pageData)
 
+        @app.route("/settings/")
+        def settingsPage():
+            pageData = self.setConfig()
+            return render_template("settings.html", pageName="Settings", config=pageData)
+
+        # User Account Section
         @app.route("/login/", methods=['POST'])
         def loginAction():
             pageData = self.setConfig()
@@ -52,6 +59,7 @@ class Routes:
             pageData = self.setConfig()
             return render_template('logout.html', pageName="Logout", config=pageData)
 
+        # Library Sections
         @app.route("/music/")
         def musicPage():
             pageData = self.setConfig()

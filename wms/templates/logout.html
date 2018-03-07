@@ -1,6 +1,6 @@
 {% include 'includes/header.html' %}
 <main class="mainContent">
-  {% if session['loggedIn'] %}
+  {% if config.user.loggedIn %}
     <form class="form" action="/logout/" method="post">
       <section class="box box-warning">
         <p>
