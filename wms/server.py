@@ -1,17 +1,13 @@
-from flask import Flask
 import logging, random
-from wms import config, db
-
-app = Flask(__name__)
-from wms import routes
+from wms import config, db, routes
 
 class Server:
-    def __init__(self, config):
+    def __init__(self, app, config):
         logging.info("Initialising Server")
         self.configData = config.configData
         routes.Routes(app, config.configData)
-        self.runServer()
+        self.runServer(app)
 
-    def runServer(self):
+    def runServer(self, app):
         app.secret_key = self.configData["Security"]["salt"]
         app.run(self.configData["Server"]["hostname"], int(self.configData["Server"]["port"]))

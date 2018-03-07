@@ -3,8 +3,12 @@
 # By William Neild
 
 # Setup libraries
+from flask import Flask
 import sys
 sys.path.insert(1, "./libraries/")
+
+# Initialise flask
+app = Flask(__name__)
 
 # grab all files/modules needed for wms
 from wms.db import DB
@@ -28,9 +32,9 @@ logging.basicConfig(
 def start():
     logging.info("========== Starting Will's Media Server ==========")
     config = Config()
-    Security(config)
-    DB(config)
-    Server(config)
+    security = Security(app, config)
+    db = DB(app, config)
+    server = Server(app, config)
 
 # Stopping function
 def stop():
