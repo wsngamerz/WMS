@@ -1,7 +1,7 @@
 import logging, sqlite3
 
 class DB:
-    def __init__(self, app, config):
+    def __init__(self, config):
         logging.info("Initialising Database")
 
     def create(self):

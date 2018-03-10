@@ -5,7 +5,6 @@ class Server:
     def __init__(self, app, config):
         logging.info("Initialising Server")
         self.configData = config.configData
-        routes.Routes(app, config.configData)
         self.runServer(app)
 
     def runServer(self, app):

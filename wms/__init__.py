@@ -41,15 +41,28 @@ if directoryErrors > 0:
 else:
     logging.info("All folders found")
 
+# Load Required core sections
+config = Config()
+db = DB(config)
+security = Security(config)
+
+# Add all flask views
+from .views import home, dashboard, music, films, tv
+homeBlueprint = home.homeBlueprint(config, db, security)
+
 # Initialise flask
 app = Flask(__name__)
+app.register_blueprint(homeBlueprint.home)
+
+# TODO: Implement These below
+# app.register_blueprint(dashboard)
+# app.register_blueprint(music)
+# app.register_blueprint(films)
+# app.register_blueprint(tv)
 
 # Starting function
 def start():
     logging.info("========== Starting Will's Media Server ==========")
-    config = Config()
-    security = Security(app, config)
-    db = DB(app, config)
     server = Server(app, config)
 
 # Stopping function
