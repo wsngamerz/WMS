@@ -4,11 +4,8 @@
 
 # Setup libraries
 from flask import Flask
-import sys
+import sys, os
 sys.path.insert(1, "./libraries/")
-
-# Initialise flask
-app = Flask(__name__)
 
 # grab all files/modules needed for wms
 from wms.db import DB
@@ -27,6 +24,25 @@ logging.basicConfig(
     datefmt = "%d-%m-%Y %H:%M:%S",
     handlers = handlers
 )
+
+# Check whether folders exist
+directories = ["logs/", "libraries/", "wms/"]
+directoryErrors = 0
+logging.info("Checking for required folders")
+for directory in directories:
+    logging.debug("checking for " + directory)
+    if os.path.isdir(directory) != True:
+        directoryErrors+=1
+        logging.error(directory + " is missing")
+
+if directoryErrors > 0:
+    logging.info("Stoping Server due to Errors")
+    sys.exit()
+else:
+    logging.info("All folders found")
+
+# Initialise flask
+app = Flask(__name__)
 
 # Starting function
 def start():
