@@ -7,7 +7,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
 import sys, os
-sys.path.insert(1, "./libraries/")
+sys.path.insert(1, "./libs/")
 
 # grab all files/modules needed for wms
 from wms.db import DB
@@ -29,7 +29,7 @@ logging.basicConfig(
 )
 
 # Check whether folders exist
-directories = ["logs/", "libraries/", "wms/"]
+directories = ["logs/", "libs/", "wms/"]
 directoryErrors = 0
 logging.info("Checking for required folders")
 for directory in directories:
