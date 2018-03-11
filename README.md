@@ -1,4 +1,4 @@
-# WMS
+# WMS [WORK IN PROGRESS]
 
 Wills Media Server
 ==================
