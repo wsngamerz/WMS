@@ -7,8 +7,8 @@ class DB:
     def __init__(self, config):
         logging.info("Initialising Databases")
 
-class Main(db.Model):
-    __bind_key__ = "main"
+# class Main(db.Model):
+#     __bind_key__ = "main"
 
 class User(db.Model):
     __bind_key__ = "users"
