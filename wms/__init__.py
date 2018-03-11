@@ -3,10 +3,10 @@
 # By William Neild
 
 # Setup libraries
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 import sys, os
 sys.path.insert(1, "./libs/")
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
 
 # grab all files/modules needed for wms
 from wms.db import DB
@@ -14,35 +14,26 @@ from wms.db import db
 from wms.config import Config
 from wms.security import Security
 from wms.server import Server
-import logging, sys
+import logging, sys, time
 
 # Setup logging to both file and terminal
-file_handler = logging.FileHandler(filename='logs/main.log')
-stdout_handler = logging.StreamHandler(sys.stdout)
-handlers = [file_handler, stdout_handler]
-logging.basicConfig(
-    level = logging.DEBUG,
-    format = "[%(asctime)s] [%(levelname)s] %(message)s",
-    datefmt = "%d-%m-%Y %H:%M:%S",
-    handlers = handlers
-)
-
-# Check whether folders exist
-directories = ["logs/", "libs/", "wms/"]
-directoryErrors = 0
-logging.info("Checking for required folders")
-for directory in directories:
-    logging.debug("checking for " + directory)
-    if os.path.isdir(directory) != True:
-        directoryErrors+=1
-        logging.error(directory + " is missing")
-
-if directoryErrors > 0:
-    logging.info("Stoping Server due to Errors")
+try:
+    file_handler = logging.FileHandler(filename='logs/main.log')
+    stdout_handler = logging.StreamHandler(sys.stdout)
+    handlers = [file_handler, stdout_handler]
+    logging.basicConfig(
+        level = logging.DEBUG,
+        format = "[%(asctime)s] [%(levelname)s] %(message)s",
+        datefmt = "%d-%m-%Y %H:%M:%S",
+        handlers = handlers
+    )
+except Exception as error:
+    print("Error: " + str(error))
+    print("Attepting to create logs folder")
+    os.makedirs("logs")
+    print("please restart WMS after the program closes")
+    time.sleep(5)
     sys.exit()
-else:
-    logging.info("All folders found")
-
 
 # Initialise flask
 app = Flask(__name__)
