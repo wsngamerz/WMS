@@ -5,9 +5,6 @@ from wms.security import pageData
 class homeBlueprint:
     def __init__(self, config, db, security):
         self.home = Blueprint("home", __name__)
-        config = config
-        db = db
-        security = security
         self.main(self.home, config, db, security)
 
     def main(self, home, config, db, security):
