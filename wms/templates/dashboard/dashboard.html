@@ -1,0 +1,13 @@
+{% include 'includes/header.html' %}
+<main class="mainContent">
+  {% if config.user.loggedIn %}
+    <h1>Dashboard</h1>
+  {% else %}
+  <section class="box box-danger">
+    <p>
+      You need to be Logged In
+    </p>
+  </section>
+  {% endif %}
+</main>
+{% include 'includes/footer.html' %}

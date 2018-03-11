@@ -5,7 +5,6 @@
 # Setup libraries
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-
 import sys, os
 sys.path.insert(1, "./libs/")
 
@@ -66,12 +65,13 @@ security = Security(config)
 # Add all flask views
 from .views import home, dashboard, music, films, tv
 homeBlueprint = home.homeBlueprint(config, database, security)
+dashboardBlueprint = dashboard.dashboardBlueprint(config, database, security)
 
 # Register Flask Blueprints
 app.register_blueprint(homeBlueprint.home)
+app.register_blueprint(dashboardBlueprint.dashboard)
 
 # TODO: Implement These below
-# app.register_blueprint(dashboard)
 # app.register_blueprint(music)
 # app.register_blueprint(films)
 # app.register_blueprint(tv)
