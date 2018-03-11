@@ -1,5 +1,5 @@
 import logging, random
-from wms import config, db, routes
+from wms import config, db
 
 class Server:
     def __init__(self, app, config):
