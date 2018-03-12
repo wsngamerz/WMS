@@ -71,11 +71,5 @@ app.register_blueprint(dashboardBlueprint.dashboard)
 db.init_app(app)
 db.create_all(app=app)
 
-# Starting function
-def start():
-    logging.info("========== Starting Will's Media Server ==========")
-    server = Server(app, config)
-
-# Stopping function
-def stop():
-    logging.info("========== Stopping Will's Media Server ==========")
+# Start the Web UI
+server = Server(app, config)
