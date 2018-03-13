@@ -9,11 +9,13 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
 # grab all files/modules needed for wms
-from wms.db import db
+from wms import db
 from wms.config import Config
 from wms.security import Security
 from wms.server import Server
 import logging, sys, time
+
+database = db
 
 # Setup logging to both file and terminal
 try:
@@ -49,9 +51,9 @@ security = Security(config)
 
 # Add all flask views
 from .views import home, dashboard, music, films, tv
-homeBlueprint = home.homeBlueprint(config, db, security)
-dashboardBlueprint = dashboard.dashboardBlueprint(config, db, security)
-musicBlueprint = music.musicBlueprint(config, db, security)
+homeBlueprint = home.homeBlueprint(config, database, security)
+dashboardBlueprint = dashboard.dashboardBlueprint(config, database, security)
+musicBlueprint = music.musicBlueprint(config, database, security)
 
 # Register Flask Blueprints
 app.register_blueprint(homeBlueprint.home)
@@ -63,8 +65,8 @@ app.register_blueprint(musicBlueprint.music)
 # app.register_blueprint(tv)
 
 # Initialise SQLAlchemy Databases
-db.init_app(app)
-db.create_all(app=app)
+database.db.init_app(app)
+database.db.create_all(app=app)
 
 # Start the Web UI
 server = Server(app, config)
