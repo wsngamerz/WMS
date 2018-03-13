@@ -3,10 +3,6 @@ import logging
 from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
-class DB:
-    def __init__(self, config):
-        logging.info("Initialising Databases")
-
 class ServerSettings(db.Model):
     __bind_key__ = "main"
     __tablename__ = "serverSettings"

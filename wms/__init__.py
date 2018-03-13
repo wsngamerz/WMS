@@ -9,7 +9,6 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
 # grab all files/modules needed for wms
-from wms.db import DB
 from wms.db import db
 from wms.config import Config
 from wms.security import Security
@@ -29,10 +28,6 @@ try:
     )
 except Exception as error:
     print("Error: " + str(error))
-    print("Attepting to create logs folder")
-    os.makedirs("logs")
-    print("please restart WMS after the program closes")
-    time.sleep(5)
     sys.exit()
 
 # Initialise flask
@@ -50,14 +45,13 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 # Load Required core config
 config = Config()
-database = DB(config)
 security = Security(config)
 
 # Add all flask views
 from .views import home, dashboard, music, films, tv
-homeBlueprint = home.homeBlueprint(config, database, security)
-dashboardBlueprint = dashboard.dashboardBlueprint(config, database, security)
-musicBlueprint = music.musicBlueprint(config, database, security)
+homeBlueprint = home.homeBlueprint(config, db, security)
+dashboardBlueprint = dashboard.dashboardBlueprint(config, db, security)
+musicBlueprint = music.musicBlueprint(config, db, security)
 
 # Register Flask Blueprints
 app.register_blueprint(homeBlueprint.home)
