@@ -22,19 +22,19 @@ class Security:
 
         return error
 
-def pageData(pageData):
-    pageData["user"] = {}
-    if not session.get("loggedIn"):
-        pageData["user"]["loggedIn"] = False
+def pageData(pageData, database):
+    pageData["User"] = {}
+    if session.get("loggedIn") == False:
+        pageData["User"]["loggedIn"] = False
     else:
-        # pageData["user"]["data"] = db.Get.user(session["loggedIn"], pageData)
-        # TODO: DB Get class
-        # DEV: Using Temporary Hard-Coded Data to fill Templates
-        pageData["user"]["loggedIn"] = True
-        pageData["user"]["data"] = {}
-        pageData["user"]["data"]["firstName"] = "TestFirstName"
-        pageData["user"]["data"]["lastName"] = "TestLastName"
-        pageData["user"]["data"]["username"] = "TestUsername"
-    pageData["request"] = {}
-    pageData["request"]["rootURL"] = str(request.url_root)
+        if session.get("userID") != None:
+            userData = database.User.query.get(session.get("userID"))
+            pageData["User"]["loggedIn"] = True
+            pageData["User"]["firstName"] = userData.firstName
+            pageData["User"]["lastName"] = userData.lastName
+            pageData["User"]["fullName"] = userData.fullName
+            pageData["User"]["username"] = userData.username
+            pageData["User"]["email"] = userData.email
+    pageData["Request"] = {}
+    pageData["Request"]["rootURL"] = str(request.url_root)
     return pageData

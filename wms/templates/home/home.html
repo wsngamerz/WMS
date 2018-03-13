@@ -6,9 +6,9 @@
 </header>
 <main class="mainContent">
   <section class="profile">
-    {% if config.user.loggedIn %}
-      <h4 class="heading-3">Welcome Back {{ config.user.data.firstName }}!</h4>
-      <a class="link">Your Account</a> - <a class="link" href="/logout/">Logout</a>
+    {% if config.User.loggedIn %}
+      <h4 class="heading-3">Welcome Back {{ config.User.firstName }}!</h4>
+      <a class="link" href="/dashboard/">Dashboard</a> - <a class="link" href="/logout/">Logout</a>
     {% else %}
       <h4 class="heading-3">Please Register or Login</h4>
       <section class="group group-two">

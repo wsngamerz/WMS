@@ -5,7 +5,7 @@
   </section>
 </header>
 <main class="mainContent">
-  {% if config.user.loggedIn %}
+  {% if config.User.loggedIn %}
     <section class="box box-danger">
       <p>
         You're logged in already!
@@ -18,7 +18,7 @@
       <input class="input input-text" type="password" name="password" placeholder="Password">
       <input class="button button-success button-login" type="submit" value="Log in">
       <p>
-        <a class="link">Register Account</a> -
+        <a class="link" href="{{ config.Request.rootURL }}register/">Register Account</a> -
         <a class="link">Forgot Password</a>
       </p>
     </form>

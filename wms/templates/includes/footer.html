@@ -1,9 +1,9 @@
     <footer>
       <span class="footer-content">
         <p class="copyright">Copyright &copy; 2017 William Neild All Rights Reserved.</p><br>
-        <a class="link link-footer" href="{{ config.request.rootURL }}">Home</a>
+        <a class="link link-footer" href="{{ config.Request.rootURL }}">Home</a>
         {% if session["loggedIn"] %}
-          - <a class="link link-footer" href="{{ config.request.rootURL }}settings/">Settings</a>
+          - <a class="link link-footer" href="{{ config.Request.rootURL }}dashboard/settings/">Settings</a>
         {% endif %}
       </span>
     </footer>
