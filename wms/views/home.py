@@ -3,11 +3,11 @@ from flask import Blueprint, render_template, request, session, redirect
 from wms.security import pageData
 
 class homeBlueprint:
-    def __init__(self, config, db, security):
+    def __init__(self, config, database, security):
         self.home = Blueprint("home", __name__)
-        self.main(self.home, config, db, security)
+        self.main(self.home, config, database, security)
 
-    def main(self, home, config, db, security):
+    def main(self, home, config, database, security):
         self.configData = config.configData
 
         @home.route("/")
@@ -42,8 +42,16 @@ class homeBlueprint:
             password = str(request.form["password"])
             passwordConfirm = str(request.form["passwordConfirm"])
             email = str(request.form["email"])
-            session["loggedIn"] = True
-            return redirect(str(pageConfig["request"]["rootURL"]), code=302)
+            validation = security.accountValidator(username, password, passwordConfirm, email)
+            if validation == []:
+                user = database.User(username=username, password=password, firstName=fname, lastName=lname, email=email)
+                database.db.session.add(user)
+                database.db.session.commit()
+                session["loggedIn"] = True
+                return redirect(str(pageConfig["request"]["rootURL"]), code=302)
+            else:
+                session["loggedIn"] = False
+                return render_template("home/regError.html", pageName="Registration Error", config=pageConfig, errors=validation)
 
         @home.route("/logout/", methods=['GET'])
         def logoutPage():

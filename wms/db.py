@@ -18,11 +18,11 @@ class User(db.Model):
     __tablename__ = "user"
     id = db.Column("userID", db.Integer, primary_key=True)
     username = db.Column("username", db.String(255), unique=True)
+    password = db.Column("password", db.String(255))
     firstName = db.Column("firstName", db.String(255))
     lastName = db.Column("lastName", db.String(255))
     fullName = db.column_property(firstName + " " + lastName)
     email = db.Column("email", db.String(255))
-    permission = db.relationship("Permission", backref="user", lazy=True)
 
 class Permission(db.Model):
     __bind_key__ = "users"
