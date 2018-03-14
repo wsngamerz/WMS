@@ -9,7 +9,7 @@ An all in one Media server with no pay for restrictions or paywalls
 
 Requirements
 ============
-- [ ] Python 3.6.x
+- [ ] Python 3.5.x or higher
 
 Starting WMS
 ============
